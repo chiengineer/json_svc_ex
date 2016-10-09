@@ -1,5 +1,8 @@
 defmodule JsonSvc do
   use Application
+  alias Router.Base, as: Router
+  alias JsonSvc.Supervisor, as: SvcSupervisor
+  alias Plug.Adapters.Cowboy, as: Handler
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -13,12 +16,12 @@ defmodule JsonSvc do
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: JsonSvc.Supervisor]
+    opts = [strategy: :one_for_one, name: SvcSupervisor]
     Supervisor.start_link(children, opts)
   end
 
   def start_server do
-    { :ok, _ } = Plug.Adapters.Cowboy.http Router.Base, []
+    {:ok, _} = Handler.http Router, []
   end
 
 end
