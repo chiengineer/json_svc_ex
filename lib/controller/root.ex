@@ -1,4 +1,8 @@
 defmodule Controller.Root do
+  @moduledoc """
+  Root (/) and health endpoints to return service details and act as an
+  external watchdog resource
+  """
   alias Response.Json, as: Json
   use Plug.Router
   plug :match

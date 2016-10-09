@@ -1,4 +1,9 @@
 defmodule Response.Json do
+  @moduledoc """
+  Poison Encoder for handling json response bodies with status code
+  sets default values for `body=%{}` and `status=200`
+  supports skipping one or both extra params
+  """
   import Plug.Conn
 
   def render(conn), do: rend(conn, %{}, 200)
