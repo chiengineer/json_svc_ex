@@ -31,7 +31,8 @@ defmodule JsonSvc.Mixfile do
     [{:cowboy, "~> 1.0.0"},
      {:plug, "~> 0.12"},
      {:poison, "~> 1.4.0"},
-     {:junit_formatter, "~> 1.1", only: [:test]}
+     {:junit_formatter, "~> 1.1", only: [:test]},
+     {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end
 end
