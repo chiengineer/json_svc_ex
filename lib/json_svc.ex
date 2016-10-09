@@ -1,4 +1,7 @@
 defmodule JsonSvc do
+  @moduledoc """
+  Base application supervisor that starts the service api router `Router.Base`
+  """
   use Application
   alias Router.Base, as: Router
   alias JsonSvc.Supervisor, as: SvcSupervisor
