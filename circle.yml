@@ -20,4 +20,5 @@ dependencies:
 test:
   override:
     - mix test
+    - mix credo --strict
     - mv ./_build/test/lib/json_svc/test-junit-report.xml $CIRCLE_TEST_REPORTS/junit.xml
