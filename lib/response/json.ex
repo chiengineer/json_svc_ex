@@ -14,10 +14,17 @@ defmodule Response.Json do
   def parse(conn, type: type), do: prse(conn, options: %{as: type})
   def parse(conn),             do: prse(conn, options: %{})
 
-  def fail(conn, status, message: message) do
+  def fail(conn, message: message, http_code: http_code), do: failp(conn, http_code, message)
+  def fail(conn, http_code: status),                do: failp(conn, status, "#{status}")
+  def fail(conn, message: body),                    do: failp(conn, 500, body)
+  def fail(conn),                                   do: failp(conn, 500, "Server Error")
+
+  #Private
+
+  defp failp(conn, status, body) do
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(status, Poison.encode!(%{error: message}))
+    |> send_resp(status, Poison.encode!(%{error: body}))
   end
 
   defp renderp(conn, body, status) do
