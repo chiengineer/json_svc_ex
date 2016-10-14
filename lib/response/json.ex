@@ -14,6 +14,12 @@ defmodule Response.Json do
   def parse(conn, type: type), do: prse(conn, options: %{as: type})
   def parse(conn),             do: prse(conn, options: %{})
 
+  def fail(conn, status, message: message) do
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(status, Poison.encode!(%{error: message}))
+  end
+
   #Private
 
   defp rend(conn, body, status) do
