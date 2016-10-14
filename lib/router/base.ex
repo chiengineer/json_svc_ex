@@ -12,6 +12,7 @@ defmodule Router.Base do
   plug :dispatch
 
   forward "/about", to: Controller.About
+  forward "/account", to: Controller.Account
   forward "/",      to: Controller.Root
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
