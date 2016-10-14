@@ -15,12 +15,7 @@ defmodule Router.Base do
   forward "/account", to: Controller.Account
   forward "/",      to: Controller.Root
 
-  def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
-    status = set_status_from_kind(kind)
-    Json.fail(conn, status, message: reason)
-  end
-
-  defp set_status_from_kind(kind) do
-    if kind == :throw, do: 400, else: 500
+  def handle_errors(conn, %{kind: _kind, reason: reason, stack: _stack}) do
+    Json.fail(conn, reason)
   end
 end
