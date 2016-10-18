@@ -11,13 +11,13 @@ defmodule Response.Json do
   def render(conn, status: status), do: renderp(conn, %{}, status)
   def render(conn, body: body, status: status), do: renderp(conn, body, status)
 
-  def parse(conn, type: type), do: prse(conn, options: %{as: type})
-  def parse(conn),             do: prse(conn, options: %{})
+  def parse(conn, type: type), do: parsep(conn, options: %{as: type})
+  def parse(conn),             do: parsep(conn, options: %{})
 
   def fail(conn, message: message, http_code: http_code), do: failp(conn, http_code, message)
   def fail(conn, http_code: status),                do: failp(conn, status, "#{status}")
   def fail(conn, message: body),                    do: failp(conn, 500, body)
-  def fail(conn),                                   do: failp(conn, 500, "Server Error")
+  def fail(conn),                                   do: failp(conn, 500, "500 Server Error")
 
   #Private
 
@@ -34,7 +34,7 @@ defmodule Response.Json do
   end
 
   alias Plug.Conn, as: Connection
-  defp prse(conn, options: options) do
+  defp parsep(conn, options: options) do
     {:ok, body, _} = Connection.read_body(conn, length: 1_000_000)
     Poison.decode!(body, options)
   end
