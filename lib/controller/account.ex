@@ -14,7 +14,7 @@ defmodule Controller.Account do
 
   post "/" do
     account_request = Json.parse(conn, type: Request)
-    Request.validate(account_request)
+    Request.validate!(account_request)
     Json.render(
       conn,
       body: %{accepted: account_request})
