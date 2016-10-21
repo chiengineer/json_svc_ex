@@ -26,7 +26,9 @@ defmodule Model.Account.Request do
       validate_array,
       fn tuple -> elem(tuple, 1) == false end)
     if length(error_keys) > 0,
-      do: raise [message: generate_error_messages(error_keys), http_code: 400]
+      do: raise %{
+        message: generate_error_messages(error_keys),
+        http_code: 400}
   end
 
   defp generate_error_messages(errors) do

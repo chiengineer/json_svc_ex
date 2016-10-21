@@ -33,16 +33,23 @@ defmodule Response.JsonTest do
 
   test "fail returns specific error code" do
     conn = conn(:get, "/about/foo")
-    result = Json.fail(conn, http_code: 504)
+    result = Json.fail(conn, %{http_code: 504})
     assert(result.resp_body =~ "504")
     assert(result.status == 504)
   end
 
   test "fail returns specific error message" do
     conn = conn(:get, "/about/foo")
-    result = Json.fail(conn, message: "This error")
+    result = Json.fail(conn, %{message: "This error"})
     assert(result.resp_body == "{\"error\":\"This error\"}")
     assert(result.status == 500)
+  end
+
+  test "fail returns specific error message and error code" do
+    conn = conn(:get, "/about/foo")
+    result = Json.fail(conn, %{message: "This error", http_code: 504})
+    assert(result.resp_body == "{\"error\":\"This error\"}")
+    assert(result.status == 504)
   end
 
 end
