@@ -2,13 +2,9 @@ machine:
   environment:
     PATH: "$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
     MIX_ENV: "test"
-  services:
-    - redis
 dependencies:
   cache_directories:
     - ~/.asdf
-    - _build
-    - deps
   pre:
     - if ! asdf | grep version; then git clone https://github.com/HashNuke/asdf.git ~/.asdf; fi
     - if ! asdf plugin-list | grep erlang; then asdf plugin-add erlang https://github.com/HashNuke/asdf-erlang.git; fi
@@ -19,6 +15,6 @@ dependencies:
     - yes | mix local.rebar
 test:
   override:
-    - mix test
+    - mix test --no-start
     - mix credo --strict
     - mv ./_build/test/lib/json_svc/test-junit-report.xml $CIRCLE_TEST_REPORTS/junit.xml

@@ -14,10 +14,11 @@ defmodule Response.Json do
   def parse(conn, type: type), do: parsep(conn, options: %{as: type})
   def parse(conn),             do: parsep(conn, options: %{})
 
+  def fail(conn), do: failp(conn, 500, "500 Server Error")
   def fail(conn, %{message: message, http_code: http_code}), do: failp(conn, http_code, message)
-  def fail(conn, %{http_code: status}),                do: failp(conn, status, "#{status}")
-  def fail(conn, %{message: body}),                    do: failp(conn, 500, body)
-  def fail(conn),                                   do: failp(conn, 500, "500 Server Error")
+  def fail(conn, %{message: message}),     do: failp(conn, 500, message)
+  def fail(conn, %{http_code: http_code}), do: failp(conn, http_code, "#{http_code}")
+
 
   #Private
 

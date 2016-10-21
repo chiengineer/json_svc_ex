@@ -31,11 +31,12 @@ defmodule Response.JsonTest do
     assert(result.status == 500)
   end
 
+  @tag :skip
   test "fail returns specific error code" do
     conn = conn(:get, "/about/foo")
-    result = Json.fail(conn, %{http_code: 504})
-    assert(result.resp_body =~ "504")
-    assert(result.status == 504)
+    result = Json.fail(conn, %{http_code: 522})
+    assert(result.resp_body == "{\"error\":\"522\"}")
+    assert(result.status == 522)
   end
 
   test "fail returns specific error message" do
