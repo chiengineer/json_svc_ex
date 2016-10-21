@@ -28,7 +28,8 @@ defmodule Model.Account.Request do
     if length(error_keys) > 0,
       do: raise %{
         message: generate_error_messages(error_keys),
-        http_code: 400}
+        http_code: 400,
+        hb_options: %{ignore: true}}
   end
 
   defp generate_error_messages(errors) do
