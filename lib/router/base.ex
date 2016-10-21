@@ -7,6 +7,7 @@ defmodule Router.Base do
   use Plug.ErrorHandler
 
   alias Response.Json, as: Json
+  alias ErrorReporter.Honeybadger, as: ErrorReporter
 
   plug :match
   plug :dispatch
@@ -15,7 +16,13 @@ defmodule Router.Base do
   forward "/account", to: Controller.Account
   forward "/",      to: Controller.Root
 
-  def handle_errors(conn, %{kind: _kind, reason: reason, stack: _stack}) do
+  def handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do
     Json.fail(conn, reason)
+    ErrorReporter.report(
+      %{kind: kind, message: reason[:message]},
+      context: %{error: reason[:context], connection: conn},
+      stacktrace: stack,
+      options: reason[:hb_options]
+      )
   end
 end
