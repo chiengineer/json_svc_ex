@@ -32,7 +32,7 @@ defmodule JsonSvc.Mixfile do
      {:plug, "~> 0.12"},
      {:poison, "~> 1.4.0"},
      {:junit_formatter, "~> 1.1", only: [:test]},
-     {:credo, "~> 0.4", only: [:dev, :test]},
+     {:credo, "~> 0.5", only: [:dev, :test]},
      {:honeybadger, "~> 0.6"}
    ]
   end
