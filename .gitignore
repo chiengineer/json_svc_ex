@@ -17,3 +17,5 @@ erl_crash.dump
 *.ez
 
 ttb_last_config
+*.overrides.exs
+*.overrides
