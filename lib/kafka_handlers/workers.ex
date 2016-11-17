@@ -2,10 +2,10 @@ require KafkaEx
 
 defmodule KafkaHandlers.Workers do
   @moduledoc """
-  Kafka Workers - create workers with atoms for handling different controller streams
+  Kafka Workers - create workers with atoms for handling different controller
+  streams
   """
   @workers [
-    :account_controller_stream,
     :about_controller_stream
   ]
 
