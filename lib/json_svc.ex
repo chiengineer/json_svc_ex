@@ -1,4 +1,5 @@
 defmodule JsonSvc do
+  require Logger
   @moduledoc """
   Base application supervisor that starts the service api router `Router.Base`
   """
@@ -24,6 +25,7 @@ defmodule JsonSvc do
   end
 
   def start_server do
+    Logger.info "Starting http router"
     {:ok, _} = Handler.http Router, []
   end
 
