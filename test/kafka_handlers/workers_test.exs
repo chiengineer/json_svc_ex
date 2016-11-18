@@ -11,5 +11,6 @@ defmodule KafkaHandlers.WorkersTest do
     refute_received _
   end
 
+  @tag :skip
   test "circle build with live kafka generates workers without stubs"
 end
