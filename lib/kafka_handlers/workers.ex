@@ -9,10 +9,10 @@ defmodule KafkaHandlers.Workers do
   """
   @workers [KafkaHandlers.Account.RequestCreate]
 
-  def create_workers do
+  def create_workers(handler \\ &KafkaEx.create_worker/1) do
     Enum.map(
       fetch_worker_ids,
-      fn(w) -> KafkaEx.create_worker(w) end
+      fn(w) -> handler.(w) end
     )
   end
 
