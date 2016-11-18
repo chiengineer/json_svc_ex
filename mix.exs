@@ -14,7 +14,7 @@ defmodule JsonSvc.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :cowboy, :plug, :poison, :honeybadger],
+    [applications: [:logger, :cowboy, :plug, :poison, :honeybadger, :kafka_ex],
      mod: {JsonSvc, []}]
   end
 
@@ -33,7 +33,9 @@ defmodule JsonSvc.Mixfile do
      {:poison, "~> 1.4.0"},
      {:junit_formatter, "~> 1.1", only: [:test]},
      {:credo, "~> 0.5", only: [:dev, :test]},
-     {:honeybadger, "~> 0.6"}
+     {:honeybadger, "~> 0.6"},
+     {:kafka_ex, "~> 0.6"},
+     { :uuid, "~> 1.1" }
    ]
   end
 end

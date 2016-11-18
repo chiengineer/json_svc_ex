@@ -27,4 +27,6 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-import_config "#{Mix.env}.exs"
+# Import environment specific configs, will also capture files like
+# ENV.overrides.exs
+import_config "#{Mix.env}*.exs"
