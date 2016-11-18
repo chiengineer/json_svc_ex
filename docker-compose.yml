@@ -1,0 +1,13 @@
+# run in terminal:
+# export DOCKER_IP=$(docker-machine ip)
+---
+services:
+  kafka:
+    image: spotify/kafka
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      - "ADVERTISED_HOST=${DOCKER_IP}"
+      - "ADVERTISED_PORT=9092"
+version: "2"

@@ -11,7 +11,7 @@ config :logger,
 #update this with your relevant host details or use dev.overrides.exs
 
 config :kafka_ex,
-  brokers: [{"localhost", 9092}],
+  brokers: [{"192.168.99.100", 9092}],
   consumer_group: "kafka_ex",
   disable_default_worker: false,
   sync_timeout: 3000,
