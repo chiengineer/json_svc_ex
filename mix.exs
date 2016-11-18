@@ -34,7 +34,8 @@ defmodule JsonSvc.Mixfile do
      {:junit_formatter, "~> 1.1", only: [:test]},
      {:credo, "~> 0.5", only: [:dev, :test]},
      {:honeybadger, "~> 0.6"},
-     {:kafka_ex, "~> 0.6"}
+     {:kafka_ex, "~> 0.6"},
+     { :uuid, "~> 1.1" }
    ]
   end
 end
