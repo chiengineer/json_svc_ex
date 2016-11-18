@@ -7,7 +7,7 @@ defmodule Model.Account.RequestTest do
     test_model = %Request{
       email: "joe@bob.com",
       last_name: "Bob"}
-    assert_raise ArgumentError, ~r/first_name is missing/, fn ->
+    assert_raise AppError, ~r/first_name is missing/, fn ->
       Request.validate!(test_model)
     end
   end
@@ -16,7 +16,7 @@ defmodule Model.Account.RequestTest do
     test_model = %Request{
       email: "joe@bob.com",
       first_name: "Bob"}
-    assert_raise ArgumentError, ~r/last_name is missing/, fn ->
+    assert_raise AppError, ~r/last_name is missing/, fn ->
       Request.validate!(test_model)
     end
   end
@@ -25,7 +25,7 @@ defmodule Model.Account.RequestTest do
     test_model = %Request{
       last_name: "Jim",
       first_name: "Bob"}
-    assert_raise ArgumentError, ~r/email is missing/, fn ->
+    assert_raise AppError, ~r/email is missing/, fn ->
       Request.validate!(test_model)
     end
   end
