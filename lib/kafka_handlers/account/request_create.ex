@@ -18,26 +18,35 @@ defmodule KafkaHandlers.Account.RequestCreate do
 
   defp publishp(payload, timestamp) do
     uuid = UUID.uuid4()
+    normalized_payload = payload_normalizer(payload, timestamp, uuid)
     KafkaEx.produce(
       "Account.RequestCreate.V1",
       select_random_partition,
-      encode_payload_request(payload, timestamp, uuid),
+      encode_payload_request(normalized_payload),
       worker_name: @worker_id
     )
-    {:ok, %{request_id: uuid, timestamp: timestamp}}
+    {:ok, normalized_payload}
   end
 
   defp select_random_partition do
     Enum.random(@partitions)
   end
 
-  defp encode_payload_request(payload, timestamp, uuid) do
-    Poison.encode!(
-      Map.merge(payload, %{
+  defp payload_normalizer(payload, timestamp, uuid) do
+    %{
+      meta: %{
         requested_at: timestamp,
         transaction_id: uuid
-        }
-      )
-    )
+      },
+      request_body: %{
+        first_name: payload.first_name,
+        last_name: payload.last_name,
+        email: payload.email
+      }
+    }
+  end
+
+  defp encode_payload_request(normalized_payload) do
+    Poison.encode!(normalized_payload)
   end
 end
