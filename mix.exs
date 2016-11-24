@@ -14,7 +14,7 @@ defmodule JsonSvc.Mixfile do
      source_url: "https://github.com/chiengineer/json_svc_ex",
      homepage_url: "https://chiengineer.github.io/json_svc_ex/",
      docs: [
-       main: "JsonSvcEx", # The main page in the docs
+       main: "JsonSvc", # The main page in the docs
        extras: ["README.md"],
        output: "docs" #folder required for github pages docs
      ]
