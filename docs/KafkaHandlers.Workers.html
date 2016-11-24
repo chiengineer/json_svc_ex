@@ -74,8 +74,7 @@
         <section id="moduledoc">
           <p>Kafka Workers - create workers with atoms for handling different controller
 streams
-@workers list of worker modules that contain interface kafka_meta
-kafka_meta - %{worker_id: identifier for worker to use}</p>
+<code class="inline">@workers</code> list of worker modules that contain interface kafka_meta</p>
 
         </section>
       
@@ -99,6 +98,10 @@ kafka_meta - %{worker_id: identifier for worker to use}</p>
   <div class="summary-signature">
     <a href="#create_workers/1">create_workers(handler \\ &amp;KafkaEx.create_worker/1)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>This function creates workers injected from the array <code class="inline">@workers</code> workers
+  <em>must</em> impliment <code class="inline">.kafka_meta[:worker_id]</code></p>
+</div>
   
 </div>
 
@@ -132,7 +135,7 @@ kafka_meta - %{worker_id: identifier for worker to use}</p>
     </a>
     <span class="signature">create_workers(handler \\ &amp;KafkaEx.create_worker/1)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L12" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L16" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -140,7 +143,9 @@ kafka_meta - %{worker_id: identifier for worker to use}</p>
     
   </div>
   <section class="docstring">
-    
+    <p>  This function creates workers injected from the array <code class="inline">@workers</code> workers
+  <em>must</em> impliment <code class="inline">.kafka_meta[:worker_id]</code></p>
+
   </section>
 </div>
 
