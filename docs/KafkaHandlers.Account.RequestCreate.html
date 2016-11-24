@@ -73,9 +73,9 @@
       
         <section id="moduledoc">
           <p>KafkaHandlers for account controller
-Publishes to kafka topic using worker defined by @worker_id
-a random partition is selected per message
-TODO: include pattern matching for versioned topics</p>
+Publishes to kafka topic using worker defined by <code class="inline">@worker_id</code>
+a random partition is selected per message</p>
+<p>TODO: include pattern matching for versioned topics</p>
 
         </section>
       
@@ -100,6 +100,10 @@ TODO: include pattern matching for versioned topics</p>
     <a href="#kafka_meta/0">kafka_meta()</a>
   </div>
   
+    <div class="summary-synopsis"><p>This function is used to inspect metadata about this defined module as a
+  kafka worker process</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -111,6 +115,10 @@ TODO: include pattern matching for versioned topics</p>
   <div class="summary-signature">
     <a href="#publish/2">publish(account_payload, list)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>This function is used to publish kafka messages default handler uses
+  <a href="https://hexdocs.pm/kafka_ex/0.6.0/KafkaEx.html"><code class="inline">KafkaEx</code></a></p>
+</div>
   
 </div>
 
@@ -142,15 +150,23 @@ TODO: include pattern matching for versioned topics</p>
     </a>
     <span class="signature">kafka_meta()</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L39" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>kafka_meta :: %{worker_id: atom, partition: integer, topic: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>  This function is used to inspect metadata about this defined module as a
+  kafka worker process</p>
+
   </section>
 </div>
 <div class="detail" id="publish/1">
@@ -161,7 +177,7 @@ TODO: include pattern matching for versioned topics</p>
     </a>
     <span class="signature">publish(account_payload)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L32" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -186,7 +202,7 @@ TODO: include pattern matching for versioned topics</p>
     </a>
     <span class="signature">publish(account_payload, list)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L16" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/account/request_create.ex#L29" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -194,13 +210,19 @@ TODO: include pattern matching for versioned topics</p>
     
       <div class="specs">
         
-          <pre>publish(map, %{timestamp: DateTime}) :: map</pre>
+          <pre>publish(map, %{timestamp: <a href="http://elixir-lang.org/docs/stable/elixir/DateTime.html#t:t/0">DateTime.t</a>}) :: map</pre>
+        
+          <pre>publish(map, %{handler: (... -> any)}) :: map</pre>
+        
+          <pre>publish(map, %{timestamp: <a href="http://elixir-lang.org/docs/stable/elixir/DateTime.html#t:t/0">DateTime.t</a>, request_id: integer, handler: (... -> any)}) :: map</pre>
         
       </div>
     
   </div>
   <section class="docstring">
-    
+    <p>  This function is used to publish kafka messages default handler uses
+  <a href="https://hexdocs.pm/kafka_ex/0.6.0/KafkaEx.html"><code class="inline">KafkaEx</code></a></p>
+
   </section>
 </div>
 
