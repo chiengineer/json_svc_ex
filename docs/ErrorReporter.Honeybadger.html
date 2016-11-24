@@ -72,12 +72,7 @@
 
       
         <section id="moduledoc">
-          <p>Reports errors to honeybadger adds option to ignore report flow</p>
-<p>iex&gt; ErrorReporter.Honeybadger.report(
-…&gt; nil,
-…&gt; context: nil,
-…&gt; stacktrace: nil,
-…&gt; options: %{ignore: true})</p>
+          <p>  Reports errors to <a href="https://hexdocs.pm/honeybadger/0.6.1/Honeybadger.html"><code class="inline">Honeybadger</code></a> adds option to ignore report flow</p>
 
         </section>
       
@@ -101,6 +96,15 @@
   <div class="summary-signature">
     <a href="#report/1">report(exception)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Ignores <a href="https://hexdocs.pm/honeybadger/0.6.1/Honeybadger.html"><code class="inline">Honeybadger</code></a> messages if <code class="inline">%{options: %{ignore: true}}</code></p>
+<h2>Examples</h2>
+<p>  iex&gt; ErrorReporter.Honeybadger.report(
+  …&gt; nil,
+  …&gt; context: nil,
+  …&gt; stacktrace: nil,
+  …&gt; options: %{ignore: true})</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -138,15 +142,32 @@
     </a>
     <span class="signature">report(exception)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L23" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>) :: {:ok, :sent}</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p> Ignores <a href="https://hexdocs.pm/honeybadger/0.6.1/Honeybadger.html"><code class="inline">Honeybadger</code></a> messages if <code class="inline">%{options: %{ignore: true}}</code></p>
+<h2 id="report/1-examples" class="section-heading">
+  <a href="#report/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<p>  iex&gt; ErrorReporter.Honeybadger.report(
+  …&gt; nil,
+  …&gt; context: nil,
+  …&gt; stacktrace: nil,
+  …&gt; options: %{ignore: true})</p>
+
   </section>
 </div>
 <div class="detail" id="report/2">
@@ -157,11 +178,19 @@
     </a>
     <span class="signature">report(exception, list)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L15" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L24" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
+    
+      <div class="specs">
+        
+          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, context: %{}, stacktrace: %{}) :: {:ok, :sent}</pre>
+        
+          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, [{:options, %{ignore: boolean}}]) :: {:ok, :ignored}</pre>
+        
+      </div>
     
   </div>
   <section class="docstring">
