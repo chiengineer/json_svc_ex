@@ -7,7 +7,17 @@ defmodule JsonSvc.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+
+     # Docs
+     name: "JsonSvcEx",
+     source_url: "https://github.com/chiengineer/json_svc_ex",
+     homepage_url: "https://github.com/chiengineer/json_svc_ex/wiki",
+     docs: [
+       main: "JsonSvcEx", # The main page in the docs
+       extras: ["README.md"]
+     ]
+   ]
   end
 
   # Configuration for the OTP application
@@ -35,7 +45,8 @@ defmodule JsonSvc.Mixfile do
      {:credo, "~> 0.5", only: [:dev, :test]},
      {:honeybadger, "~> 0.6"},
      {:kafka_ex, "~> 0.6"},
-     { :uuid, "~> 1.1" }
+     { :uuid, "~> 1.1" },
+     {:ex_doc, "~> 0.14", only: :dev}
    ]
   end
 end
