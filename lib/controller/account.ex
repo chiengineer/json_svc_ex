@@ -16,10 +16,10 @@ defmodule Controller.Account do
   post "/" do
     account_request = Json.parse(conn, type: Request)
     Request.validate!(account_request)
-    {:ok , %{request_id: id, timestamp: time}} = Kafka.publish(account_request)
+    {:ok , request_payload} = Kafka.publish(account_request)
     Json.render(
       conn,
-      body: %{accepted: account_request, request_id: id, timestamp: time})
+      body: %{accepted: request_payload})
   end
 
   match _ do

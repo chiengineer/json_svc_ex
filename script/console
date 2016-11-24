@@ -1,1 +1,1 @@
-iex lib/json_svc.ex
+ iex -S mix run --no-start
