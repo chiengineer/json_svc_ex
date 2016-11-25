@@ -5,18 +5,21 @@ defmodule ErrorReporter.Honeybadger do
     Reports errors to `Honeybadger` adds option to ignore report flow
   """
 
-  @doc ~S"""
+  @doc """
    This Function reports error exceptions to Honeybadger.io
    Ignores `Honeybadger` messages if `%{options: %{ignore: true}}`
   ## Parameters
     - excption: `Exception` originally raised or created
   ## Examples
-    iex> ErrorReporter.Honeybadger.report(
-    ...> nil,
-    ...> context: nil,
-    ...> stacktrace: nil,
-    ...> options: %{ignore: true})
-    {:ok, :ignored}
+  ```elixir
+  iex> ErrorReporter.Honeybadger.report(
+  ...> nil,
+  ...> context: nil,
+  ...> stacktrace: nil,
+  ...> options: %{ignore: true})
+  {:ok, :ignored}
+
+  ```
   """
 
   @spec report(Exception.t) :: {:ok, :sent}

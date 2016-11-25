@@ -3,13 +3,15 @@ defmodule Model.Account.Request do
   Account request object
 
   ## Examples
-
+  ```elixir
   iex> test_model = %Model.Account.Request{
   ...> first_name: "Joe",
   ...> last_name: "Bob",
   ...> email: "joe@bob.com"}
   iex> Model.Account.Request.validate!(test_model)
   {:ok, :valid}
+
+  ```
   """
   @derive [Poison.Encoder]
   @required_keys [:first_name, :last_name, :email]

@@ -78,11 +78,13 @@
   Examples
 </h2>
 
-<p>iex&gt; test_model = %Model.Account.Request{
-…&gt; first_name: “Joe”,
-…&gt; last_name: “Bob”,
-…&gt; email: “joe@bob.com”}
-iex&gt; Model.Account.Request.validate!(test_model)</p>
+<pre><code class="elixir">iex&gt; test_model = %Model.Account.Request{
+...&gt; first_name: &quot;Joe&quot;,
+...&gt; last_name: &quot;Bob&quot;,
+...&gt; email: &quot;joe@bob.com&quot;}
+iex&gt; Model.Account.Request.validate!(test_model)
+{:ok, :valid}
+</code></pre>
 
         </section>
       
@@ -137,7 +139,7 @@ iex&gt; Model.Account.Request.validate!(test_model)</p>
     </a>
     <span class="signature">validate!(request)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/model/account/request.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/model/account/request.ex#L20" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
