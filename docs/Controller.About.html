@@ -73,7 +73,18 @@
       
         <section id="moduledoc">
           <p>Example About controller with sub enpoint route and failover 404 matcher
-all endpoints are aliased with <code class="inline">/about/*</code> based on Router.Base</p>
+all endpoints are aliased with <code class="inline">/about/*</code> based on <a href="Router.Base.html"><code class="inline">Router.Base</code></a></p>
+<h2 id="module-routes" class="section-heading">
+  <a href="#module-routes" class="hover-link"><i class="icon-link"></i></a>
+  Routes
+</h2>
+
+<ul>
+<li><code class="inline">GET /about/:name</code> returns a passthrough <a href="Response.Json.html"><code class="inline">Response.Json</code></a>
+</li>
+<li>All other results return a <code class="inline">404</code> error
+</li>
+</ul>
 
         </section>
       
@@ -140,7 +151,7 @@ all endpoints are aliased with <code class="inline">/about/*</code> based on Rou
     </a>
     <span class="signature">call(conn, opts)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/about.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/about.ex#L11" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -160,7 +171,7 @@ all endpoints are aliased with <code class="inline">/about/*</code> based on Rou
     </a>
     <span class="signature">init(opts)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/about.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/about.ex#L11" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

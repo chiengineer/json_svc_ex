@@ -2,6 +2,11 @@ defmodule Controller.Root do
   @moduledoc """
   Root (/) and health endpoints to return service details and act as an
   external watchdog resource
+
+  ## Routes
+  - `GET /_health` returns {"status": "ok"}
+  - `GET /` returns {"service": "json_svc_ex"}
+  - All other results return a `404` error
   """
   alias Response.Json, as: Json
   use Plug.Router

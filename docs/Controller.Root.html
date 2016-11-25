@@ -74,6 +74,19 @@
         <section id="moduledoc">
           <p>Root (/) and health endpoints to return service details and act as an
 external watchdog resource</p>
+<h2 id="module-routes" class="section-heading">
+  <a href="#module-routes" class="hover-link"><i class="icon-link"></i></a>
+  Routes
+</h2>
+
+<ul>
+<li><code class="inline">GET /_health</code> returns {“status”: “ok”}
+</li>
+<li><code class="inline">GET /</code> returns {“service”: “json_svc_ex”}
+</li>
+<li>All other results return a <code class="inline">404</code> error
+</li>
+</ul>
 
         </section>
       
@@ -140,7 +153,7 @@ external watchdog resource</p>
     </a>
     <span class="signature">call(conn, opts)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/root.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/root.ex#L12" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -160,7 +173,7 @@ external watchdog resource</p>
     </a>
     <span class="signature">init(opts)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/root.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/controller/root.ex#L12" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

@@ -1,10 +1,15 @@
 defmodule Controller.Account do
   @moduledoc """
   Account controller manages details of account modifications
-  POST - request create of Account details
-  PATCH - request modification of account details
-  DELETE - request removal of Account details
   TODO: GET - get read optimized account details
+
+  ## Routes
+  - `POST /account/` - creates account details request
+      - validates incoming payload `Model.Account.Request.validate!/1`
+      - creates kafka message of validated payload
+        `KafkaHandlers.Account.RequestCreate.publish/1`
+      - returns acceptance payload `Response.Json.render/2`
+  - All other results return a `404` error
   """
   alias Response.Json, as: Json
   alias Model.Account.Request, as: Request
