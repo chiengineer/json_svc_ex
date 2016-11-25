@@ -109,6 +109,11 @@ iex&gt; Model.Account.Request.validate!(test_model)
     <a href="#validate!/1">validate!(request)</a>
   </div>
   
+    <div class="summary-synopsis"><p>This function validates an request object required keys are validated
+if all required keys are not present an <a href="AppError.html"><code class="inline">AppError</code></a> is raised. Honeybadger
+error is ignored. http status code is set to 400 for an invalid input error</p>
+</div>
+  
 </div>
 
   </div>
@@ -139,15 +144,24 @@ iex&gt; Model.Account.Request.validate!(test_model)
     </a>
     <span class="signature">validate!(request)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/model/account/request.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/model/account/request.ex#L30" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>validate!(%{first_name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, last_name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, email: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}) :: {:ok, :valid}</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>This function validates an request object required keys are validated
+if all required keys are not present an <a href="AppError.html"><code class="inline">AppError</code></a> is raised. Honeybadger
+error is ignored. http status code is set to 400 for an invalid input error</p>
+
   </section>
 </div>
 

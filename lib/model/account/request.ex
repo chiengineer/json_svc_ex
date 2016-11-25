@@ -17,6 +17,16 @@ defmodule Model.Account.Request do
   @required_keys [:first_name, :last_name, :email]
   defstruct @required_keys
 
+  @spec validate!(%{
+    first_name: String.t,
+    last_name: String.t,
+    email: String.t
+  }) :: {:ok, :valid}
+  @doc """
+  This function validates an request object required keys are validated
+  if all required keys are not present an `AppError` is raised. Honeybadger
+  error is ignored. http status code is set to 400 for an invalid input error
+  """
   def validate!(request) do
     validate_array = validate_keysp(@required_keys, request)
     throw_error_for_invalid_entries!(validate_array)
