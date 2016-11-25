@@ -99,6 +99,9 @@ supports skipping one or both extra params</p>
     <a href="#fail/1">fail(conn)</a>
   </div>
   
+    <div class="summary-synopsis"><p>This function sends a failure message to a <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a> connected client</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -117,11 +120,17 @@ supports skipping one or both extra params</p>
     <a href="#parse/2">parse(conn, list)</a>
   </div>
   
+    <div class="summary-synopsis"><p>This function parses an incoming json response body</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#render/1">render(conn)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>This function renders a result back to an incoming connection</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -159,15 +168,35 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">fail(conn)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L17" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L51" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>fail(Plug.Conn) :: no_return</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>This function sends a failure message to a <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a> connected client</p>
+<h2 id="fail/1-parameters" class="section-heading">
+  <a href="#fail/1-parameters" class="hover-link"><i class="icon-link"></i></a>
+  Parameters
+</h2>
+
+<ul>
+<li>conn - expects <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a>
+</li>
+<li>message: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html"><code class="inline">Map</code></a> or <a href="http://elixir-lang.org/docs/stable/elixir/String.html"><code class="inline">String</code></a> error message to report to client
+</li>
+<li>http_code: <a href="http://elixir-lang.org/docs/stable/elixir/Integer.html"><code class="inline">Integer</code></a> http status code to send to client
+</li>
+</ul>
+
   </section>
 </div>
 <div class="detail" id="fail/2">
@@ -178,11 +207,17 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">fail(conn, map)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L52" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
+    
+      <div class="specs">
+        
+          <pre>fail(Plug.Conn, %{message: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, http_code: pos_integer}) :: no_return</pre>
+        
+      </div>
     
   </div>
   <section class="docstring">
@@ -197,11 +232,17 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">parse(conn)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L15" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L36" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
+    
+      <div class="specs">
+        
+          <pre>parse(Plug.Conn) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></pre>
+        
+      </div>
     
   </div>
   <section class="docstring">
@@ -216,15 +257,33 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">parse(conn, list)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L35" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>parse(Plug.Conn, [{:type, any}]) :: any</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>This function parses an incoming json response body</p>
+<h2 id="parse/2-parameters" class="section-heading">
+  <a href="#parse/2-parameters" class="hover-link"><i class="icon-link"></i></a>
+  Parameters
+</h2>
+
+<ul>
+<li>conn - expectes <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a>
+</li>
+<li>type - passed in type to render the incoming payload as
+</li>
+</ul>
+
   </section>
 </div>
 <div class="detail" id="render/1">
@@ -235,15 +294,35 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">render(conn)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L9" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L21" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>render(Plug.Conn) :: no_return</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>This function renders a result back to an incoming connection</p>
+<h2 id="render/1-parameters" class="section-heading">
+  <a href="#render/1-parameters" class="hover-link"><i class="icon-link"></i></a>
+  Parameters
+</h2>
+
+<ul>
+<li>conn - expectes <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a>
+</li>
+<li>body - response body <a href="http://elixir-lang.org/docs/stable/elixir/Map.html"><code class="inline">Map</code></a> or <a href="http://elixir-lang.org/docs/stable/elixir/String.html"><code class="inline">String</code></a> that is parsed into Json
+</li>
+<li>status - http status code <a href="http://elixir-lang.org/docs/stable/elixir/Integer.html"><code class="inline">Integer</code></a>
+</li>
+</ul>
+
   </section>
 </div>
 <div class="detail" id="render/2">
@@ -254,11 +333,21 @@ supports skipping one or both extra params</p>
     </a>
     <span class="signature">render(conn, list)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L10" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/response/json.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
+    
+      <div class="specs">
+        
+          <pre>render(Plug.Conn, [{:body, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>}]) :: no_return</pre>
+        
+          <pre>render(Plug.Conn, [{:status, pos_integer}]) :: no_return</pre>
+        
+          <pre>render(Plug.Conn, body: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, status: pos_integer) :: no_return</pre>
+        
+      </div>
     
   </div>
   <section class="docstring">
