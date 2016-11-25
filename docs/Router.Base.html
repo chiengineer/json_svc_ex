@@ -74,6 +74,15 @@
         <section id="moduledoc">
           <p>Base Router, handles all forwarding requests to separate controllers based on
 each controller’s defined path</p>
+<h1>Routes</h1>
+<ul>
+<li><code class="inline">/about</code> - forwards to <a href="Controller.About.html"><code class="inline">Controller.About</code></a>
+</li>
+<li><code class="inline">/account</code> - forwards to <a href="Controller.Account.html"><code class="inline">Controller.Account</code></a>
+</li>
+<li><code class="inline">/</code> - forwards to <a href="Controller.Root.html"><code class="inline">Controller.Root</code></a>
+</li>
+</ul>
 
         </section>
       
@@ -106,6 +115,9 @@ each controller’s defined path</p>
   <div class="summary-signature">
     <a href="#handle_errors/2">handle_errors(conn, map)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>raised errors from http requests are handled here</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -166,15 +178,28 @@ each controller’s defined path</p>
     </a>
     <span class="signature">handle_errors(conn, map)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/router/base.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/router/base.ex#L31" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
     
+      <div class="specs">
+        
+          <pre>handle_errors(Plug.Conn, list) :: no_return</pre>
+        
+      </div>
+    
   </div>
   <section class="docstring">
-    
+    <p>raised errors from http requests are handled here</p>
+<ul>
+<li><a href="Response.Json.html#fail/2"><code class="inline">Response.Json.fail/2</code></a> sent to <a href="https://hexdocs.pm/plug/0.14.0/Plug.Conn.html"><code class="inline">Plug.Conn</code></a> client
+</li>
+<li>error reported via <a href="ErrorReporter.Honeybadger.html"><code class="inline">ErrorReporter.Honeybadger</code></a>
+</li>
+</ul>
+
   </section>
 </div>
 <div class="detail" id="init/1">
@@ -185,7 +210,7 @@ each controller’s defined path</p>
     </a>
     <span class="signature">init(opts)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/router/base.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/router/base.ex#L11" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
