@@ -1,5 +1,9 @@
 # JsonSvcEx
 
+Documentation is available using [ExDocs](https://chiengineer.github.io/json_svc_ex)
+
+This project was inspired by a talk at [Abstractions Conference 2016](http://abstractions.io) by Bobby Calderwood titled "Decoupled, Immutable REST APIs with Kafka Streams" [(slides)](https://speakerdeck.com/bobbycalderwood/commander-decoupled-immutable-rest-apis-with-kafka-streams)
+
 ## Description
 
 Basic Json microservice using sinatra style inline routes, powered by Cowboy
