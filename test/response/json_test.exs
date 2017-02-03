@@ -31,7 +31,6 @@ defmodule Response.JsonTest do
     assert(result.status == 500)
   end
 
-  @tag :skip
   test "fail returns specific error code" do
     conn = conn(:get, "/about/foo")
     result = Json.fail(conn, %{http_code: 522})
