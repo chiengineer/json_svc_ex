@@ -14,24 +14,35 @@ defmodule KafkaHandlers.Account.RequestCreate do
   @topic Enum.join([@topic_model, @topic_action, @topic_version], ".")
   @partitions [0]
 
-  @spec publish(map, %{timestamp: DateTime.t}) :: map
-  @spec publish(map, %{handler: fun}) :: map
   @spec publish(
-    map,
-    %{timestamp: DateTime.t, request_id: integer, handler: fun}
-  ) :: map
-  @spec publish(map) :: map
+    map(),
+    %{
+      optional(:timestamp) => DateTime.t,
+      optional(:request_id) => String.t,
+      optional(:handler) => fun()
+    }
+  ) :: [
+    {
+      :ok,
+      %{
+          meta: %{requested_at: String.t, transaction_id: String.t},
+          request_body: map()
+        }
+    }
+  ]
   @doc """
     This function is used to publish kafka messages default handler uses
     `KafkaEx`
   """
 
   def publish(account_payload, timestamp: time), do: publishp(account_payload, format_time(time))
-  def publish(account_payload, handler: handler), do: publishp(account_payload, format_time(now), handler)
+  def publish(account_payload, handler: handler), do: publishp(account_payload, format_time(now()), handler)
   def publish(account_payload, timestamp: time, request_id: id, handler: handler), do: publishp(account_payload, format_time(time), handler, id)
-  def publish(account_payload), do: publishp(account_payload, format_time(now))
+  def publish(account_payload), do: publishp(account_payload, format_time(now()))
 
-  @spec kafka_meta() :: %{worker_id: atom, partition: integer, topic: String.t}
+  @spec kafka_meta() :: %{
+    worker_id: atom(), partitions: Integer.t, topic: String.t
+  }
   @doc """
     This function is used to inspect metadata about this defined module as a
     kafka worker process
@@ -40,16 +51,29 @@ defmodule KafkaHandlers.Account.RequestCreate do
     %{worker_id: @worker_id, partitions: @partitions, topic: @topic}
   end
 
-  @spec publishp(map, DateTime.t, fun, UUID.t) :: {:ok, map}
+  @spec publishp(map, String.t, fun, String.t) :: {:ok, map}
   defp publishp(payload, timestamp, handler \\ &KafkaEx.produce/4, uuid \\ UUID.uuid4()) do
-    normalized_payload = payload_normalizer(payload, timestamp, uuid)
+    {:ok, valid_uuid} = validate_uuid(uuid)
+    normalized_payload = payload_normalizer(payload, timestamp, valid_uuid)
     handler.(
       @topic,
-      select_random_partition,
+      select_random_partition(),
       encode_payload_request(normalized_payload),
       worker_name: @worker_id
     )
     {:ok, normalized_payload}
+  end
+
+  @spec validate_uuid(String.t) :: {:ok, String.t}
+  defp validate_uuid(uuid) do
+    [
+      {:uuid, valid_uuid},
+      {:binary, _},
+      {:type, :default},
+      {:version, 4},
+      {:variant, :rfc4122}
+    ] = UUID.info!(uuid)
+    {:ok, valid_uuid}
   end
 
   @spec select_random_partition() :: integer
@@ -67,18 +91,14 @@ defmodule KafkaHandlers.Account.RequestCreate do
      DateTime.to_iso8601(datetime)
   end
 
-  @spec payload_normalizer(map, DateTime.t, UUID.t) :: map
+  @spec payload_normalizer(map, String.t, String.t) :: map
   defp payload_normalizer(payload, timestamp, uuid) do
     %{
       meta: %{
         requested_at: timestamp,
         transaction_id: uuid
       },
-      request_body: %{
-        first_name: payload.first_name,
-        last_name: payload.last_name,
-        email: payload.email
-      }
+      request_body: payload
     }
   end
 
