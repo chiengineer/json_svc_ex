@@ -15,7 +15,7 @@ defmodule KafkaHandlers.Workers do
   @spec create_workers() :: [pid]
   def create_workers(handler \\ &KafkaEx.create_worker/1) do
     Enum.map(
-      fetch_worker_ids,
+      fetch_worker_ids(),
       fn(w) -> handler.(w) end
     )
   end
