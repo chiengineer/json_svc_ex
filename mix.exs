@@ -8,6 +8,7 @@ defmodule JsonSvc.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
+     dialyzer: [ignore_warnings: "dialyzer.ignore-warnings"],
 
      # Docs
      name: "JsonSvcEx",
@@ -49,7 +50,8 @@ defmodule JsonSvc.Mixfile do
      {:honeybadger, "~> 0.6"},
      {:kafka_ex, "~> 0.6"},
      { :uuid, "~> 1.1" },
-     {:ex_doc, "~> 0.14", only: :dev}
+     {:ex_doc, "~> 0.14", only: :dev},
+     {:dialyxir, "~> 0.4", only: [:dev, :test], runtime: false}
    ]
   end
 end
