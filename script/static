@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+mix dialyzer --halt-exit-status
+
