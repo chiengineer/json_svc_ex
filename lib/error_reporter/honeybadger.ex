@@ -24,7 +24,12 @@ defmodule ErrorReporter.Honeybadger do
 
   @spec report(Exception.t) :: {:ok, :sent}
   @spec report(Exception.t, %{}) :: {:ok, :sent}
-  @spec report(Exception.t, context: %{}, stacktrace: %{}, options: %{ignore: boolean}) :: {:ok, :ignored}
+  @spec report(
+    Exception.t,
+    context: %{},
+    stacktrace: %{},
+    options: %{ignore: boolean}
+  ) :: {:ok, :ignored}
 
 
   def report(exception), do: reportp(exception, nil, nil)
