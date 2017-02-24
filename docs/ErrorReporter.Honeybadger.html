@@ -149,7 +149,7 @@
     </a>
     <span class="signature">report(exception)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L35" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -197,7 +197,7 @@
     </a>
     <span class="signature">report(exception, list)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L30" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/error_reporter/honeybadger.ex#L36" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -205,9 +205,9 @@
     
       <div class="specs">
         
-          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, context: %{}, stacktrace: %{}) :: {:ok, :sent}</pre>
+          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, %{}) :: {:ok, :sent}</pre>
         
-          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, [{:options, %{ignore: boolean}}]) :: {:ok, :ignored}</pre>
+          <pre>report(<a href="http://elixir-lang.org/docs/stable/elixir/Exception.html#t:t/0">Exception.t</a>, context: %{}, stacktrace: %{}, options: %{ignore: boolean}) :: {:ok, :ignored}</pre>
         
       </div>
     
