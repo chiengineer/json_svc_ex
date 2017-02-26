@@ -55,7 +55,7 @@ defmodule KafkaHandlers.Account.RequestCreate do
   defp publishp(payload, timestamp, handler \\ &KafkaEx.produce/4, uuid \\ UUID.uuid4()) do
     {:ok, valid_uuid} = validate_uuid(uuid)
     normalized_payload = payload_normalizer(payload, timestamp, valid_uuid)
-    handler.(
+    :ok = handler.(
       @topic,
       select_random_partition(),
       encode_payload_request(normalized_payload),

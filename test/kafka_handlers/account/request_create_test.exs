@@ -2,6 +2,7 @@ defmodule MockHandler do
   def handler do
     fn (topic, partition, json_payload, worker_name: worker_id) ->
       send self(), {:payload_sent, [topic, partition, json_payload, worker_name: worker_id]}
+      :ok
     end
   end
 
