@@ -52,4 +52,11 @@ defmodule Response.JsonTest do
     assert(result.status == 504)
   end
 
+  test "handles unexpected payload shapes" do
+    conn = conn(:get, "/about/foo")
+    result = Json.fail(conn, %{unknown_key: "This error"})
+    assert(result.resp_body == "{\"error\":{\"unknown_key\":\"This error\"}}")
+    assert(result.status == 500)
+  end
+
 end
