@@ -52,6 +52,7 @@ defmodule Response.Json do
   def fail(conn, %{message: message, http_code: http_code}), do: failp(conn, http_code, message)
   def fail(conn, %{message: message}),     do: failp(conn, 500, message)
   def fail(conn, %{http_code: http_code}), do: failp(conn, http_code, "#{http_code}")
+  def fail(conn, payload), do: failp(conn, 500, payload)
 
   defp failp(conn, status, body) do
     conn
