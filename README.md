@@ -25,8 +25,13 @@ run tests:
 script/test
 ```
 
-Start Kafka
+Start Kafka - from existing container (assumes ssh git)
 ```
+docker-machine start
+$ eval "$(docker-machine env default)"
+cd <your-preferred-file-location>
+git clone git@github.com:wurstmeister/kafka-docker.git
+cd kafka-docker
 docker-compose up
 ```
 If you don't have docker installed follow [the directions below](#install-docker)
@@ -36,6 +41,15 @@ run interactive server (default env is `dev`):
 script/server
 ```
 The server will not fully start without kafka running
+
+you will know kafka is running correctly when you can run the following:
+```
+iex(1)> KafkaEx.metadata
+%KafkaEx.Protocol.Metadata.Response{
+  brokers: [%KafkaEx.Protocol.Metadata.Broker{host: "192.168.99.100",
+  node_id: 1001, port: 32769, socket: nil}], topic_metadatas: []
+}
+```
 
 ## Install docker
 
