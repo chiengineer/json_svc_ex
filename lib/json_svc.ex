@@ -7,7 +7,9 @@ defmodule JsonSvc do
   alias Router.Base, as: Router
   alias JsonSvc.Supervisor, as: SvcSupervisor
   alias Plug.Adapters.Cowboy, as: Handler
-  alias KafkaHandlers.Workers, as: Kafka
+  alias KafkaHandlers.Workers, as: KafkaProducers
+  alias KafkaHandlers.Consumers, as: KafkaConsumers
+
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -16,13 +18,13 @@ defmodule JsonSvc do
 
     # Define workers and child supervisors to be supervised
     children = [
-      worker(__MODULE__, [], function: :start_server)
+      worker(__MODULE__, [], function: :start_server),
+      worker(KafkaConsumers, [])
     ]
-
-    Kafka.create_workers
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
+    KafkaProducers.create_workers
     opts = [strategy: :one_for_one, name: SvcSupervisor]
     Supervisor.start_link(children, opts)
   end
