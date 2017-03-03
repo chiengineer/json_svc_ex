@@ -51,7 +51,8 @@ defmodule JsonSvc.Mixfile do
      {:kafka_ex, "~> 0.6"},
      { :uuid, "~> 1.1" },
      {:ex_doc, "~> 0.14", only: :dev},
-     {:dialyxir, "~> 0.4", only: [:dev, :test], runtime: false}
+     {:dialyxir, "~> 0.4", only: [:dev, :test], runtime: false},
+     {:flow, "~> 0.11"}
    ]
   end
 end
