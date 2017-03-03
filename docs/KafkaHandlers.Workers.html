@@ -64,7 +64,7 @@
         KafkaHandlers.Workers
         
         
-          <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L3" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L4" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -96,7 +96,7 @@ streams
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#create_workers/1">create_workers(handler \\ &amp;KafkaEx.create_worker/1)</a>
+    <a href="#create_workers/1">create_workers(handler \\ &amp;KafkaEx.create_worker/2)</a>
   </div>
   
     <div class="summary-synopsis"><p>This function creates workers injected from the array <code class="inline">@workers</code> workers
@@ -133,13 +133,19 @@ streams
     <a href="#create_workers/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">create_workers(handler \\ &amp;KafkaEx.create_worker/1)</span>
+    <span class="signature">create_workers(handler \\ &amp;KafkaEx.create_worker/2)</span>
     
-      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L16" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka_handlers/workers.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
+    
+      <div class="specs">
+        
+          <pre>create_workers(function) :: [pid]</pre>
+        
+      </div>
     
   </div>
   <section class="docstring">
