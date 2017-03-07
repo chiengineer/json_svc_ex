@@ -1,9 +1,7 @@
 defmodule MockHandler do
-  def handler do
-    fn (topic, partition, json_payload, worker_name: worker_id) ->
-      send self(), {:payload_sent, [topic, partition, json_payload, worker_name: worker_id]}
-      :ok
-    end
+  def handler(topic, partition, json_payload, worker_name: worker_id) do
+    send self(), {:payload_sent, [topic, partition, json_payload, worker_name: worker_id]}
+    :ok
   end
 
   def valid_payload do
@@ -18,7 +16,7 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
   test "correct topic is received" do
     RequestCreate.publish(
       MockHandler.valid_payload,
-      handler: MockHandler.handler
+      handler: &MockHandler.handler/4
     )
     assert_received {:payload_sent, [topic, _, _, _]}
     assert topic == "Account.RequestCreate.V1"
@@ -28,7 +26,7 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
   test "correct partition is received" do
     RequestCreate.publish(
       MockHandler.valid_payload,
-      handler: MockHandler.handler
+      handler: &MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, 0, _, _]}
     refute_received _
@@ -49,7 +47,7 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
       MockHandler.valid_payload,
       timestamp: timestamp,
       request_id: uuid,
-      handler: MockHandler.handler
+      handler: &MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, _, payload, _]}
     assert payload == expected_payload
@@ -59,7 +57,7 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
   test "correct worker name is received" do
     RequestCreate.publish(
       MockHandler.valid_payload,
-      handler: MockHandler.handler
+      handler: &MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, _, _, worker_name: worker_id]}
     assert worker_id == :account_controller_stream
