@@ -1,0 +1,539 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.14.3">
+    <title>Kafka.Helpers – JsonSvcEx v0.1.1</title>
+    <link rel="stylesheet" href="dist/app-091c05798a.css" />
+    
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="JsonSvc.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        JsonSvcEx
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">JsonSvcEx v0.1.1</small>
+        Kafka.Helpers
+        
+        
+          <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L1" title="View Source" class="view-source" rel="help">
+            <i class="icon-code"></i>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Kafka.Helpers provides helper functions to simplify producing, consuming and
+interacting with kafka topics</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#encode_payload_request/1">encode_payload_request(normalized_payload)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>creates a json payload from an incoming map</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#fetch_handler_ids/1">fetch_handler_ids(handlers)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>fetches uniq worker ids from a collection of kafka worker module names via
+kafka_meta/0</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#fetch_worker_ids/1">fetch_worker_ids(topics)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>collects normalized payloads of uniq consumers, handlers and expected batch
+sizes</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#format_time/1">format_time(datetime)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>formate a timestamp to a iso formated datetime</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#now/0">now()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>generate a utc standardized timestamp</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#now_string/0">now_string()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>genreates an iso8601 now timestamp</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#payload_normalizer/3">payload_normalizer(payload, timestamp, uuid)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Normalizes an outgoing payload
+Examples</p>
+<pre><code class="iex elixir">iex&gt; payload = %{hello: :world}
+iex&gt; time = &quot;2017-03-19T02:48:15.814147Z&quot;
+iex&gt; uuid = &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;
+iex&gt; Kafka.Helpers.payload_normalizer(payload, time, uuid)
+%{meta: %{
+  requested_at: &quot;2017-03-19T02:48:15.814147Z&quot;,
+  transaction_id: &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;},
+request_body: %{hello: :world}}</code></pre>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#select_random_partition/1">select_random_partition(partitions)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>selects a random value from a set of partions</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start_consumers/2">start_consumers(topics, handler \\ &amp;KafkaEx.fetch/3)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>starts a collection of consumer workers defaulting to KafkaEx.fetch/3 for
+the message handler</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_uuid/1">validate_uuid(uuid)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>validates a string as a uuid</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Kafka.Helpers.validate_uuid(&quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;)
+{:ok, &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;}</code></pre>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="encode_payload_request/1">
+  
+  <div class="detail-header">
+    <a href="#encode_payload_request/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">encode_payload_request(normalized_payload)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L70" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>encode_payload_request(map) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>creates a json payload from an incoming map</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch_handler_ids/1">
+  
+  <div class="detail-header">
+    <a href="#fetch_handler_ids/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">fetch_handler_ids(handlers)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L119" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>fetch_handler_ids([reference]) :: [atom]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>fetches uniq worker ids from a collection of kafka worker module names via
+kafka_meta/0</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch_worker_ids/1">
+  
+  <div class="detail-header">
+    <a href="#fetch_worker_ids/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">fetch_worker_ids(topics)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L130" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>fetch_worker_ids([reference]) :: atom | [atom]</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>collects normalized payloads of uniq consumers, handlers and expected batch
+sizes</p>
+
+  </section>
+</div>
+<div class="detail" id="format_time/1">
+  
+  <div class="detail-header">
+    <a href="#format_time/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">format_time(datetime)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L55" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>format_time(<a href="http://elixir-lang.org/docs/stable/elixir/DateTime.html#t:t/0">DateTime.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>formate a timestamp to a iso formated datetime</p>
+<p>Examples</p>
+<pre><code class="iex elixir">iex&gt; timestamp = &quot;2017-03-19T02:48:15.814147Z&quot;
+iex&gt; {:ok, time, _} = DateTime.from_iso8601(timestamp)
+iex&gt; Kafka.Helpers.format_time(time)
+&quot;2017-03-19T02:48:15.814147Z&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="now/0">
+  
+  <div class="detail-header">
+    <a href="#now/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">now()</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L39" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>now :: <a href="http://elixir-lang.org/docs/stable/elixir/DateTime.html#t:t/0">DateTime.t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>generate a utc standardized timestamp</p>
+
+  </section>
+</div>
+<div class="detail" id="now_string/0">
+  
+  <div class="detail-header">
+    <a href="#now_string/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">now_string()</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L62" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>genreates an iso8601 now timestamp</p>
+
+  </section>
+</div>
+<div class="detail" id="payload_normalizer/3">
+  
+  <div class="detail-header">
+    <a href="#payload_normalizer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">payload_normalizer(payload, timestamp, uuid)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L104" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>payload_normalizer(map, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: map</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Normalizes an outgoing payload
+Examples</p>
+<pre><code class="iex elixir">iex&gt; payload = %{hello: :world}
+iex&gt; time = &quot;2017-03-19T02:48:15.814147Z&quot;
+iex&gt; uuid = &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;
+iex&gt; Kafka.Helpers.payload_normalizer(payload, time, uuid)
+%{meta: %{
+  requested_at: &quot;2017-03-19T02:48:15.814147Z&quot;,
+  transaction_id: &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;},
+request_body: %{hello: :world}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="select_random_partition/1">
+  
+  <div class="detail-header">
+    <a href="#select_random_partition/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">select_random_partition(partitions)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L85" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>select_random_partition([integer]) :: integer</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>selects a random value from a set of partions</p>
+<p>Examples</p>
+<pre><code class="iex elixir">iex&gt; partitions = [1]
+iex&gt; Kafka.Helpers.select_random_partition(partitions)
+1</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="start_consumers/2">
+  
+    <span id="start_consumers/1" />
+  
+  <div class="detail-header">
+    <a href="#start_consumers/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">start_consumers(topics, handler \\ &amp;KafkaEx.fetch/3)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L143" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>start_consumers([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>], (... -> any)) :: {:ok, [pid]}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>starts a collection of consumer workers defaulting to KafkaEx.fetch/3 for
+the message handler</p>
+
+  </section>
+</div>
+<div class="detail" id="validate_uuid/1">
+  
+  <div class="detail-header">
+    <a href="#validate_uuid/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">validate_uuid(uuid)</span>
+    
+      <a href="https://github.com/chiengineer/json_svc_ex/blob/master/lib/kafka/helpers.ex#L22" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>validate_uuid(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>} |
+  {:error, :invalid_uuid}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>validates a string as a uuid</p>
+<h2 id="validate_uuid/1-examples" class="section-heading">
+  <a href="#validate_uuid/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Kafka.Helpers.validate_uuid(&quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;)
+{:ok, &quot;33c5aa7e-3f35-47bc-883b-33ea0ace89f0&quot;}
+
+iex&gt; Kafka.Helpers.validate_uuid(&quot;some_string&quot;)
+{:error, :invalid_uuid}
+</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.14.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-574613960f.js"></script>
+  </body>
+</html>
+
