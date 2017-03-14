@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
 mix test --no-start $@
-mix credo --strict
+mix credo --strict $@
