@@ -80,12 +80,23 @@ All base paths are defined in <a href="Router.Base.html"><code class="inline">Ro
 <pre><code class="elixir">mix deps.get</code></pre>
 <p>run tests:</p>
 <pre><code class="elixir">script/test</code></pre>
-<p>Start Kafka</p>
-<pre><code class="elixir">docker-compose up</code></pre>
+<p>Start Kafka - from existing container (assumes ssh git)</p>
+<pre><code class="elixir">docker-machine start
+$ eval &quot;$(docker-machine env default)&quot;
+cd &lt;your-preferred-file-location&gt;
+git clone git@github.com:wurstmeister/kafka-docker.git
+cd kafka-docker
+docker-compose up</code></pre>
 <p>If you don’t have docker installed follow <a href="#install-docker">the directions below</a></p>
 <p>run interactive server (default env is <code class="inline">dev</code>):</p>
 <pre><code class="elixir">script/server</code></pre>
 <p>The server will not fully start without kafka running</p>
+<p>you will know kafka is running correctly when you can run the following:</p>
+<pre><code class="elixir">iex(1)&gt; KafkaEx.metadata
+%KafkaEx.Protocol.Metadata.Response{
+  brokers: [%KafkaEx.Protocol.Metadata.Broker{host: &quot;192.168.99.100&quot;,
+  node_id: 1001, port: 32769, socket: nil}], topic_metadatas: []
+}</code></pre>
 <h2 id="install-docker" class="section-heading">
   <a href="#install-docker" class="hover-link"><i class="icon-link"></i></a>
   Install docker
