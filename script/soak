@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+ruby -S ruby_tester/runner.rb $@

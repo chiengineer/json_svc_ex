@@ -1,0 +1,5 @@
+source 'https://rubygems.org' do
+  gem 'excon', '~> 0.55.0'
+  gem 'concurrent-ruby', require: 'concurrent'
+  gem 'pry'
+end
