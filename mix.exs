@@ -43,11 +43,11 @@ defmodule JsonSvc.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 0.12"},
-     {:poison, "~> 1.4.0"},
+     {:plug, "~> 1.3.3"},
+     {:poison, "~> 2.0"},
      {:junit_formatter, "~> 1.1", only: [:test]},
      {:credo, "~> 0.5", only: [:dev, :test]},
-     {:honeybadger, "~> 0.6"},
+     {:honeybadger, "~> 0.6.1"},
      {:kafka_ex, "~> 0.6"},
      { :uuid, "~> 1.1" },
      {:ex_doc, "~> 0.14", only: :dev},
