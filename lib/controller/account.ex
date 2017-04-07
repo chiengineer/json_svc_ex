@@ -19,7 +19,7 @@ defmodule Controller.Account do
   plug :dispatch
 
   post "/" do
-    account_request = Json.parse(conn, type: Request)
+    account_request = Json.parse(conn, type: %Request{})
     Request.validate!(account_request)
     {:ok , request_payload} = Kafka.publish(account_request)
     Json.render(
