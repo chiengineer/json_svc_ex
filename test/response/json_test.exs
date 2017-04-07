@@ -59,4 +59,22 @@ defmodule Response.JsonTest do
     assert(result.status == 500)
   end
 
+  test "renders a json payload to a map" do
+    conn = conn(:post, "/about/foo", "{\"foo\":\"bar\"}")
+             |> put_req_header("content-type", "application/json")
+    result = Json.parse(conn)
+    assert(result == %{"foo" => "bar"})
+  end
+
+  defmodule MockType do
+    defstruct [:foo]
+  end
+
+  test "renders a json payload to a specific map struct" do
+    conn = conn(:post, "/about/foo", "{\"foo\":\"bar\"}")
+             |> put_req_header("content-type", "application/json")
+    result = Json.parse(conn, type: %MockType{})
+    assert(result == %MockType{foo: "bar"})
+  end
+
 end
