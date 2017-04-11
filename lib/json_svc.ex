@@ -18,8 +18,10 @@ defmodule JsonSvc do
 
     # Define workers and child supervisors to be supervised
     children = [
+      supervisor(JsonSvc.Sockets.Endpoint, []),
       worker(__MODULE__, [], function: :start_server),
-      worker(KafkaConsumers, [])
+      worker(KafkaConsumers, []),
+      supervisor(Phoenix.PubSub.PG2, [JsonSvc.Channels.Room, []])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -31,7 +33,21 @@ defmodule JsonSvc do
 
   def start_server do
     Logger.info "Starting http router"
-    {:ok, _} = Handler.http Router, []
+    {:ok, _} = Handler.http Router, [], dispatch: dispatch
+  end
+
+  # def start_socket_server do
+  #   Logger.info "Starting socket server"
+  #   {:ok, _} =
+  # end
+
+  defp dispatch do
+    [
+      {:_, [
+        {"/ws", JsonSvc.Sockets.Endpoint, []},
+        {:_, Plug.Adapters.Cowboy.Handler, {Router, []}}
+      ]}
+    ]
   end
 
 end
