@@ -52,7 +52,9 @@ defmodule JsonSvc.Mixfile do
      { :uuid, "~> 1.1" },
      {:ex_doc, "~> 0.14", only: :dev},
      {:dialyxir, "~> 0.4", only: [:dev, :test], runtime: false},
-     {:flow, "~> 0.11"}
+     {:flow, "~> 0.11"},
+     {:phoenix, "~> 1.2.1"},
+     {:phoenix_pubsub, "~> 1.0"}
    ]
   end
 end
