@@ -21,13 +21,21 @@ defmodule JsonSvc.Sockets.Endpoint do
       {:reply, {:text, "pong"}, req, state}
     end
 
+    def websocket_handle({:text, "request_create:" <> token}, req, state) do
+      {:ok, socket} = JsonSvc.Channels.RequestCreate.join(
+        "request_create:" <> token,
+        :join,
+        req)
+      {:ok, socket, %{channel: "request_create:" <> token}}
+    end
+
     def websocket_handle({:text, message}, req, %{channel: "room:" <> name}) do
       {:noreply, socket} = JsonSvc.Channels.Room.handle_in("new_msg", %{"body" => message}, req, %{channel: "room:"<>name})
       {:ok, socket, %{channel: "room:"<>name}}
     end
 
     def websocket_handle({:text, "room:" <> name}, req, state) do
-      {:ok, socket} = JsonSvc.Channels.Room.join("room:" <> name, get_socket_keyp(req), req)
+      {:ok, socket} = JsonSvc.Channels.Room.join("room:" <> name, :join, req)
       {:ok, socket, %{channel: "room:" <> name}}
     end
 

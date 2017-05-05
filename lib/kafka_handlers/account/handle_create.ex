@@ -9,6 +9,7 @@ defmodule KafkaHandlers.Account.HandleCreate do
   """
 
   alias KafkaHandlers.Account.Accounts, as: AccountHandler
+  alias Kafka.Helpers, as: Helper
 
   @worker_id :account_handle_request_create_stream
   @topic_model "Account"
@@ -28,17 +29,23 @@ defmodule KafkaHandlers.Account.HandleCreate do
     %{worker_id: @worker_id, partitions: @partitions, topic: @topic}
   end
 
-  def process_batch(message_batch) do
+  def process_batch(message_batch, options) do
     Logger.info("Processing #{inspect(length(message_batch))} messages")
     message_batch
       |> Flow.from_enumerable()
       |> Flow.map(&Poison.decode!/1)
       |> Flow.map(&AccountHandler.normalize_body/1)
       |> Flow.map(&AccountHandler.create/1)
+      |> Flow.map(&KafkaHandlers.Account.HandleCreate.create/1)
       |> Flow.run()
     :created
   end
 
-
-
+  def create({:ok, payload}, handler \\ &KafkaEx.produce/4) do
+    indexed_payload = Helper.index_payload_by_request_id(payload)
+    normalized_payload = Helper.encode_payload_request(indexed_payload)
+    key = Helper.select_random_partition(@partitions)
+    :ok = handler.(@topic, key, normalized_payload, worker_name: @worker_id)
+    {:ok, payload}
+  end
 end

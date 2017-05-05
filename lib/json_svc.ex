@@ -21,7 +21,8 @@ defmodule JsonSvc do
       supervisor(JsonSvc.Sockets.Endpoint, []),
       worker(__MODULE__, [], function: :start_server),
       worker(KafkaConsumers, []),
-      supervisor(Phoenix.PubSub.PG2, [JsonSvc.Channels.Room, []])
+      supervisor(Phoenix.PubSub.PG2, [JsonSvc.Channels.RequestCreate, [name: :pubsub]])
+      # supervisor(Phoenix.PubSub.PG2, [JsonSvc.Channels.RequestCreate, [name: :request_create_pubsub]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
