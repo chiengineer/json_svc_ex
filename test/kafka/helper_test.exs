@@ -61,7 +61,9 @@ defmodule Kafka.HelpersTest do
         handler: &Kafka.MockHandler.process_batch/1,
         partitions: [0],
         topic: "topic2",
-        worker_id: :worker_id2}
+        worker_id: :worker_id2,
+        options: nil
+      }
     ]
     results = Kafka.Helpers.fetch_worker_ids(mock_topics)
     assert results === expected_result
@@ -84,6 +86,13 @@ defmodule Kafka.HelpersTest do
     {status, pids} = Kafka.Helpers.start_consumers(mock_topics, fetch_messages_handler)
     assert status === :ok
     assert length(pids) == length(mock_topics)
+  end
+
+  test 'index_payload_by_request_id raises errors when request_id is missing' do
+    payload = %{foo: "bar"}
+    assert_raise MatchError, ~r/{:error, :malfomred_request}/, fn ->
+      Kafka.Helpers.index_payload_by_request_id(payload)
+    end
   end
 
 end
