@@ -50,7 +50,7 @@ defmodule Kafka.HelpersTest do
       %{
         consume: MockWorker,
         produce: MockHandler,
-        handler: &MockHandler.process_batch/1,
+        handler: &Kafka.MockHandler.process_batch/1,
         batch_size: 10
       }
     ]
@@ -58,7 +58,7 @@ defmodule Kafka.HelpersTest do
     expected_result = [
       %{
         batch_size: 10,
-        handler: &MockHandler.process_batch/1,
+        handler: &Kafka.MockHandler.process_batch/1,
         partitions: [0],
         topic: "topic2",
         worker_id: :worker_id2}
@@ -72,7 +72,7 @@ defmodule Kafka.HelpersTest do
       %{
         consume: MockWorker,
         produce: MockHandler,
-        handler: &MockHandler.process_batch/1,
+        handler: &Kafka.MockHandler.process_batch/1,
         batch_size: 10
       }
     ]
