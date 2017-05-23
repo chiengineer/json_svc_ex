@@ -14,9 +14,9 @@ defmodule KafkaHandlers.Consumers do
   @topics [
     %{
       consume: KafkaHandlers.Account.RequestCreate,
-      produce: KafkaHandlers.Account.HandleCreate,
-      handler: &KafkaHandlers.Account.HandleCreate.process_batch/1,
-      batch_size: 10
+      handler: &KafkaHandlers.Account.HandleCreate.process_batch/2,
+      batch_size: 10,
+      options: %{}
     }
   ]
 

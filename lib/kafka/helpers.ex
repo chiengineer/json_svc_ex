@@ -130,7 +130,11 @@ defmodule Kafka.Helpers do
   def fetch_worker_ids(topics) do
     topics
       |> Enum.map(
-        fn(w) -> fetch_worker_payloads(w[:consume], w[:handler], w[:batch_size]
+        fn(w) -> fetch_worker_payloads(
+          w[:consume],
+          w[:handler],
+          w[:batch_size],
+          w[:options]
         ) end)
       |> Enum.uniq()
   end
@@ -155,25 +159,56 @@ defmodule Kafka.Helpers do
      worker.kafka_meta[:worker_id]
   end
 
-  @spec fetch_worker_payloads(module, fun, integer) ::
+  @spec fetch_worker_payloads(module, fun, integer, map()) ::
     %{
       topic: String.t, partitions: list(any), handler: fun,
-      batch_size: integer, worker_id: atom
+      batch_size: integer, worker_id: atom, options: map()
     }
-  defp fetch_worker_payloads(consumer, handler, batch_size) do
+  defp fetch_worker_payloads(consumer, handler, batch_size, opts) do
     %{
       topic: consumer.kafka_meta[:topic],
       partitions: consumer.kafka_meta[:partitions],
       handler: handler,
       batch_size: batch_size,
-      worker_id: consumer.kafka_meta[:worker_id]
+      worker_id: consumer.kafka_meta[:worker_id],
+      options: opts
     }
   end
 
-  defp looping_fetch_messagesp(partition, w, handler) do
+  @doc """
+  Reindexes payload by `request_id`
+  Examples
+  ```
+  iex> request_id = "33c5aa7e-3f35-47bc-883b-33ea0ace89f0"
+  iex> payload = %{request_id: request_id, other_key: "foo"}
+  iex> Kafka.Helpers.index_payload_by_request_id(payload)
+  %{
+    "33c5aa7e-3f35-47bc-883b-33ea0ace89f0": [
+      %{request_id: "33c5aa7e-3f35-47bc-883b-33ea0ace89f0",
+      other_key: "foo"}
+    ]
+  }
+  ```
+  """
+  def index_payload_by_request_id(payload) do
+    {:ok, request_id} = extract_request_idp(payload)
+    {:ok, valid_uuid} = validate_uuid(request_id)
+    %{
+      "#{valid_uuid}": [payload]
+    }
+  end
+
+  defp extract_request_idp(payload) do
+    case payload do
+      %{request_id: id} -> {:ok, id}
+      _anything         -> {:error, :malfomred_request}
+    end
+  end
+
+  def looping_fetch_messages(partition, w, handler) do
     worker_msgs = handler.(w[:topic], partition, [worker_name: w[:worker_id]])
     handle_messagesp(worker_msgs, w)
-    looping_fetch_messagesp(partition, w, handler)
+    looping_fetch_messages(partition, w, handler)
   end
 
   defp handle_messagesp(:topic_not_found, _), do: :no_topic
@@ -182,7 +217,7 @@ defmodule Kafka.Helpers do
     messages = worker_msgs
       |> Enum.flat_map(fn(p) -> p.partitions end)
       |> Enum.flat_map(fn(p) -> p.message_set end)
-    process_batchp(messages, w[:handler], w[:batch_size])
+    process_batchp(messages, w[:handler], w[:batch_size], w[:options])
   end
 
   defp ensure_valid_request(partition, w, handler) do
@@ -215,22 +250,22 @@ defmodule Kafka.Helpers do
       |> Enum.map(fn(partition) ->
         Logger.info("Spawning Link for #{partition}")
         spawn_link(fn ->
-          looping_fetch_messagesp(partition, worker_id, handler)
+          looping_fetch_messages(partition, worker_id, handler)
         end)
       end)
   end
 
-  defp process_batchp([], _, _) do
+  defp process_batchp([], _, _, _) do
     :timer.sleep(1000)
     :empty_messages
   end
 
-  defp process_batchp(kafka_messages, handler, batch_size) do
+  defp process_batchp(kafka_messages, handler, batch_size, options) do
     messages = kafka_messages
       |> Flow.from_enumerable(max_demand: batch_size)
       |> Flow.map(fn(m) -> m.value end)
       |> Enum.to_list
-    handler.(messages)
+    handler.(messages, options)
     :processed_batch
   end
 

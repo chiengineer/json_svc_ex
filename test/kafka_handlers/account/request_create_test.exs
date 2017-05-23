@@ -1,22 +1,11 @@
-defmodule MockHandler do
-  def handler(topic, partition, json_payload, worker_name: worker_id) do
-    send self(), {:payload_sent, [topic, partition, json_payload, worker_name: worker_id]}
-    :ok
-  end
-
-  def valid_payload do
-    %{first_name: "joe", last_name: "bob", email: "joe@bob.com"}
-  end
-end
-
 defmodule KafkaHandlers.Account.RequestCreateTest do
   use ExUnit.Case, async: true
   alias KafkaHandlers.Account.RequestCreate, as: RequestCreate
 
   test "correct topic is received" do
     RequestCreate.publish(
-      MockHandler.valid_payload,
-      handler: &MockHandler.handler/4
+      Kafka.MockHandler.valid_payload,
+      handler: &Kafka.MockHandler.handler/4
     )
     assert_received {:payload_sent, [topic, _, _, _]}
     assert topic == "Account.RequestCreate.V1"
@@ -25,8 +14,8 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
 
   test "correct partition is received" do
     RequestCreate.publish(
-      MockHandler.valid_payload,
-      handler: &MockHandler.handler/4
+      Kafka.MockHandler.valid_payload,
+      handler: &Kafka.MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, 0, _, _]}
     refute_received _
@@ -40,14 +29,14 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
         requested_at: DateTime.to_iso8601(timestamp),
         transaction_id: uuid
       },
-      request_body: MockHandler.valid_payload
+      request_body: Kafka.MockHandler.valid_payload
     })
 
     RequestCreate.publish(
-      MockHandler.valid_payload,
+      Kafka.MockHandler.valid_payload,
       timestamp: timestamp,
       request_id: uuid,
-      handler: &MockHandler.handler/4
+      handler: &Kafka.MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, _, payload, _]}
     assert payload == expected_payload
@@ -56,8 +45,8 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
 
   test "correct worker name is received" do
     RequestCreate.publish(
-      MockHandler.valid_payload,
-      handler: &MockHandler.handler/4
+      Kafka.MockHandler.valid_payload,
+      handler: &Kafka.MockHandler.handler/4
     )
     assert_received {:payload_sent, [_, _, _, worker_name: worker_id]}
     assert worker_id == :account_controller_stream
@@ -66,4 +55,8 @@ defmodule KafkaHandlers.Account.RequestCreateTest do
 
   @tag :skip
   test "circle build with live kafka generates workers without stubs"
+
+  test "`create` publishes a payload event indexed by the request_id" do
+
+  end
 end
