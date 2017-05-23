@@ -50,15 +50,4 @@ defmodule KafkaHandlers.Account.Accounts do
       created_at: Helper.now_string()
     }
   end
-
-  @spec payload_normalizer(map, String.t, String.t) :: map
-  defp payload_normalizer(payload, timestamp, uuid) do
-    %{
-      meta: %{
-        requested_at: timestamp,
-        transaction_id: uuid
-      },
-      request_body: payload
-    }
-  end
 end
